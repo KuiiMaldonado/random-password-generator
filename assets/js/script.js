@@ -1,46 +1,51 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  var password = {};
-  let pswdLength;
-  let isLowerCase, isUpperCase, isNumeric, isSpecialChars;
-  password.length = getPasswordLength();
-  password.isLowerCase = includeLowerCase();
-  password.isUpperCase = includeUpperCase();
-  password.isNumeric = includeNumeric();
-  password.isSpecialChars = includeSpecialChars();
+function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
+  this.length = length;
+  this.isLowerCase = isLowerCase;
+  this.isUpperCase = isUpperCase;
+  this.isNumeric = isNumeric;
+  this.isSpecialChars = isSpecialChars;
+  this.isValid = false;
+  this.validateCriteria = function (){
+    let isCriteriaOk = true;
+    let passwordLength = parseInt(this.length, 10);
 
-  console.log(password.length);
-  console.log(password.isLowerCase);
-  console.log(password.isUpperCase);
-  console.log(password.isNumeric);
-  console.log(password.isSpecialChars);
+    if(Number.isNaN(passwordLength) || (this.length < 8 || this.length > 128)){
+      isCriteriaOk = false;
+    }
+    else if(!this.isLowerCase && !this.isUpperCase && !this.isNumeric && !this.isSpecialChars)
+      isCriteriaOk = false
 
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
-  //
-  // passwordText.value = password;
-
+    this.isValid = isCriteriaOk;
+  }
 }
 
-// function getPasswordLength() {
-//   let passwordLength;
-//
-//   while (true) {
-//     passwordLength = window.prompt("Please choose the password length between 8 and 128 characters:");
-//     if (passwordLength !== null && passwordLength !== "") {
-//       if (passwordLength >= 8 && passwordLength <= 128) {
-//         return passwordLength;
-//       } else
-//         window.alert("You must enter a valid length");
-//     } else {
-//       window.alert("Please enter valid value");
-//     }
-//   }
-//
-// }
+// Write password to the #password input
+function writePassword() {
+  let pswdLength, isLowerCase, isUpperCase, isNumeric, isSpecialChars;
+
+  pswdLength = getPasswordLength();
+  isLowerCase = includeLowerCase();
+  isUpperCase = includeUpperCase();
+  isNumeric = includeNumeric();
+  isSpecialChars = includeSpecialChars();
+
+  var pswd = new password(pswdLength, isLowerCase, isUpperCase, isNumeric, isSpecialChars);
+  pswd.validateCriteria();
+  if(pswd.isValid){
+
+  }
+  else {
+    window.alert("Please check password length is between 8 - 128 and at least one criteria was selected.")
+  }
+    // var password = generatePassword();
+    // var passwordText = document.querySelector("#password");
+    //
+    // passwordText.value = password;
+
+}
 
 // Asks user for the desired password's length.
 function getPasswordLength() {
