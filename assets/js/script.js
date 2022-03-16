@@ -23,15 +23,57 @@ function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
     this.isValid = isCriteriaOk;
   };
 
+  this.isCharacterValid = function (character){
+    let validChar = true;
+    let decimalChar;
 
+    decimalChar = character.charCodeAt(0);
+    if(decimalChar >= 48 && decimalChar <= 57){
+      if (this.isNumeric){
+        validChar = true;
+      }
+      else{
+        validChar = false;
+      }
+    }
+    else if (decimalChar >= 65 && decimalChar <= 90){
+      if (this.isUpperCase){
+        validChar = true;
+      }
+      else{
+        validChar = false;
+      }
+    }
+    else if (decimalChar >= 97 && decimalChar <= 122){
+      if (this.isLowerCase){
+        validChar = true;
+      }
+      else{
+        validChar = false;
+      }
+    }
+    else {
+      if (this.isSpecialChars){
+        validChar = true;
+      }
+      else{
+        validChar = false;
+      }
+    }
+
+    return validChar;
+  }
 
   this.generatePassword = function(){
     let result = "";
+    let i = 0;
 
-    for (let i = 0; i < this.length; i++) {
-      // console.log(String.fromCharCode(this.minRange + Math.random() * (this.maxRange - this.minRange + 1)));
+    while (i < this.length) {
       let character = String.fromCharCode(0x0020 + Math.random() * (0x007E - 0x0020 + 1))
-      result += character;
+      if(this.isCharacterValid(character)){
+        result += character;
+        i++;
+      }
     }
 
     this.value = result;
