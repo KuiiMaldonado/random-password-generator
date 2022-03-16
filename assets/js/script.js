@@ -3,19 +3,20 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  var password = {};
   let pswdLength;
   let isLowerCase, isUpperCase, isNumeric, isSpecialChars;
-  pswdLength = getPasswordLength();
-  isLowerCase = includeLowerCase();
-  isUpperCase = includeUpperCase();
-  isNumeric = includeNumeric();
-  isSpecialChars = includeSpecialChars();
+  password.length = getPasswordLength();
+  password.isLowerCase = includeLowerCase();
+  password.isUpperCase = includeUpperCase();
+  password.isNumeric = includeNumeric();
+  password.isSpecialChars = includeSpecialChars();
 
-  console.log(pswdLength);
-  console.log(isLowerCase);
-  console.log(isUpperCase);
-  console.log(isNumeric);
-  console.log(isSpecialChars);
+  console.log(password.length);
+  console.log(password.isLowerCase);
+  console.log(password.isUpperCase);
+  console.log(password.isNumeric);
+  console.log(password.isSpecialChars);
 
   // var password = generatePassword();
   // var passwordText = document.querySelector("#password");
