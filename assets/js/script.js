@@ -8,6 +8,9 @@ function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
   this.isNumeric = isNumeric;
   this.isSpecialChars = isSpecialChars;
   this.isValid = false;
+  this.minRange = 0;
+  this.maxRange = 0;
+
   this.validateCriteria = function (){
     let isCriteriaOk = true;
     let passwordLength = parseInt(this.length, 10);
@@ -19,7 +22,28 @@ function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
       isCriteriaOk = false
 
     this.isValid = isCriteriaOk;
-  }
+  };
+
+  this.getCharactersRange = function (){
+    if(this.isNumeric){
+      this.minRange = 0x0030;
+      this.maxRange = 0x0039;
+    }
+  };
+
+  this.generatePassword = function(){
+    let result = "";
+
+    this.getCharactersRange();
+
+    for (let i = 0; i < this.length; i++) {
+      // console.log(String.fromCharCode(this.minRange + Math.random() * (this.maxRange - this.minRange + 1)));
+      let character = String.fromCharCode(this.minRange + Math.random() * (this.maxRange - this.minRange + 1))
+      result += character;
+    }
+
+    this.value = result;
+  };
 }
 
 // Write password to the #password input
@@ -35,15 +59,13 @@ function writePassword() {
   var pswd = new password(pswdLength, isLowerCase, isUpperCase, isNumeric, isSpecialChars);
   pswd.validateCriteria();
   if(pswd.isValid){
-
+    pswd.generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = pswd.value;
   }
   else {
     window.alert("Please check password length is between 8 - 128 and at least one criteria was selected.")
   }
-    // var password = generatePassword();
-    // var passwordText = document.querySelector("#password");
-    //
-    // passwordText.value = password;
 
 }
 
