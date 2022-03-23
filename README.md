@@ -29,7 +29,7 @@ WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 ```
 
-##Deployed app
+## Deployed app
 
 ![Password Generator application](assets/images/password_generator.jpg)
 ![Password Generator length criteria](assets/images/password_len.jpg)
