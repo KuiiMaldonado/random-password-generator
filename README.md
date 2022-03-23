@@ -31,6 +31,8 @@ THEN the password is either displayed in an alert or written to the page
 
 ## Deployed app
 
+### URL: https://kuiimaldonado.github.io/random-password-generator/
+
 ![Password Generator application](assets/images/password_generator.jpg)
 ![Password Generator length criteria](assets/images/password_len.jpg)
 ![Password Generator characters criteria](assets/images/password_criteria.jpg)
