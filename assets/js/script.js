@@ -1,5 +1,5 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+let generateBtn = document.querySelector("#generate");
 
 function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
   this.length = length;
@@ -29,34 +29,22 @@ function password(length, isLowerCase, isUpperCase, isNumeric, isSpecialChars){
 
     decimalChar = character.charCodeAt(0);
     if(decimalChar >= 48 && decimalChar <= 57){
-      if (this.isNumeric){
-        validChar = true;
-      }
-      else{
+      if (!this.isNumeric){
         validChar = false;
       }
     }
     else if (decimalChar >= 65 && decimalChar <= 90){
-      if (this.isUpperCase){
-        validChar = true;
-      }
-      else{
+      if (!this.isUpperCase){
         validChar = false;
       }
     }
     else if (decimalChar >= 97 && decimalChar <= 122){
-      if (this.isLowerCase){
-        validChar = true;
-      }
-      else{
+      if (!this.isLowerCase){
         validChar = false;
       }
     }
     else {
-      if (this.isSpecialChars){
-        validChar = true;
-      }
-      else{
+      if (!this.isSpecialChars){
         validChar = false;
       }
     }
@@ -90,7 +78,7 @@ function writePassword() {
   isNumeric = includeNumeric();
   isSpecialChars = includeSpecialChars();
 
-  var pswd = new password(pswdLength, isLowerCase, isUpperCase, isNumeric, isSpecialChars);
+  let pswd = new password(pswdLength, isLowerCase, isUpperCase, isNumeric, isSpecialChars);
   pswd.validateCriteria();
   if(pswd.isValid){
     pswd.generatePassword();
